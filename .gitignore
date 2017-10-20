@@ -1,0 +1,8 @@
+*.pdb
+*.dll
+langroids/bin/*
+langroids/obj/*
+langroids_tests/bin/*
+langroids_tests/obj/*
+src/.vs
+.vs
