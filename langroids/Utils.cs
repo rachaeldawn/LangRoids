@@ -16,10 +16,16 @@ public static partial class LangRoids {
 
 
     /// <summary>
-    /// Set an object to its default value.
+    /// Set an reference to any variable to its default value.
     /// </summary>
-    /// <param name="arg">The object to nullify</param>
+    /// <param name="arg">The reference to nullify</param>
     public static void Nullify<T>(ref T arg) => arg = default;
+
+    /// <summary>
+    /// Set an object to null
+    /// </summary>
+    /// <param name="arg">The object to set to null</param>
+    public static void Nullify(object arg) => arg = null;
 
 
     /// <summary>
