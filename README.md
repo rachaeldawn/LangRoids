@@ -117,7 +117,7 @@ void ValidateDetails(string name, uint age, string email, Action onInvalidName =
     AddNewPlayer(name, age, email);
 }
 ```
-Jimminy Christmas, that's some code we got there. Can you imagine having to write this without a framework for EVERY SINGLE function? That would drive me insane to the point where I'd call Dependency Injection stupid and useless. But, fear not, because I thought of this.
+Jiminy Christmas, that's some code we got there. Can you imagine having to write this without a framework for EVERY SINGLE function? That would drive me insane to the point where I'd call Dependency Injection stupid and useless. But, fear not, because I thought of this.
 ```
 void ValidateDetails(string name, uint age, string email, Action onInvalidName = null, Action onInvalidAge = null, Action onInvalidEmail = null) => Perform(
     (name.Length > 0, onInvalidName, new InvalidNameException()),
