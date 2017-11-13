@@ -4,7 +4,7 @@ using System.Text;
 
 public static partial class LangRoids {
     public static uint Smallest(params uint[] nums) {
-        ThrowIf(nums.Length == 0, new ArgumentOutOfRangeException("At least one argument required."));
+        Assure<ArgumentOutOfRangeException>(nums.Length > 0);
         if (nums.Length == 1) {
             return nums[0];
         }
@@ -13,7 +13,7 @@ public static partial class LangRoids {
         return smallest;
     }
     public static int Smallest(params int[] nums) {
-        ThrowIf(nums.Length == 0, new ArgumentOutOfRangeException("At least one argument required."));
+        Assure<ArgumentOutOfRangeException>(nums.Length > 0);
         if (nums.Length == 1) {
             return nums[0];
         }
@@ -22,7 +22,7 @@ public static partial class LangRoids {
         return smallest;
     }
     public static byte Smallest(params byte[] nums) {
-        ThrowIf(nums.Length == 0, new ArgumentOutOfRangeException("At least one argument required"));
+        Assure<ArgumentOutOfRangeException>(nums.Length > 0);
         if (nums.Length == 1) {
             return nums[0];
         }
@@ -31,7 +31,7 @@ public static partial class LangRoids {
         return smallest;
     }
     public static double Smallest(params double[] nums) {
-        ThrowIf(nums.Length == 0, new ArgumentOutOfRangeException("At least one argument required"));
+        Assure<ArgumentOutOfRangeException>(nums.Length != 0);
         if (nums.Length == 1) {
             return nums[0];
         }
@@ -40,7 +40,7 @@ public static partial class LangRoids {
         return smallest;
     }
     public static float Smallest(params float[] nums) {
-        ThrowIf(nums.Length == 0, new ArgumentOutOfRangeException("At least one argument required"));
+        Assure<ArgumentOutOfRangeException>(nums.Length > 0);
         if (nums.Length == 1) {
             return nums[0];
         }

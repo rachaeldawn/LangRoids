@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 
 public static partial class LangRoids {
-    public static bool Assure(bool test, Action fail, Exception e) {
+    public static void Assure<E>(bool test)
+        where E: Exception, new()
+        {
         if (!test) {
-            DoOrThrow(fail, e);
+            throw new E( );
+        }
+    }
+    public static bool Assure<E>(bool test, Action fail)
+        where E : Exception, new(){
+        if (!test) {
+            (fail ?? (() => throw new E( )))( );
             return false;
         }
         return true;
     }
-    public static bool Assure(params (bool test, Action success, Exception e)[] assurances) {
-        foreach ((bool test, Action success, Exception e) in assurances) {
-            if (!Assure(test, success, e)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    public static bool Assure(Assurance asn) => Assure(asn.Test, asn.Fail, asn.Except);
-    public static bool Assure(Assurance[] assurances) {
-        foreach (Assurance a in assurances) {
-            if (!Assure(a)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
+    public static bool Assure<E>(Assurance<E> asn) 
+        where E : Exception, new()
+        => Assure<E>(asn.Test, asn.Fail);
 }

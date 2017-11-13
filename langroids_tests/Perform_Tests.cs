@@ -34,6 +34,7 @@ namespace langroids_tests
             Perform(() => false, () => works = false);
             Assert.IsTrue(works, "Modified works and should not have");
         }
+        
         private static bool simplePerformTest = true;
         [TestMethod]
         public void PerformIf_ExpressionBodyIsSimple() => Perform(true, () => {
@@ -43,7 +44,7 @@ namespace langroids_tests
         [TestMethod]
         public void Perform_UsesAssurances() {
             bool works = false;
-            Perform(new Assurance(false, () => works = true, null), DoNothing);
+            Perform(new Assurance<Exception>(false, () => works = true), DoNothing);
             Assert.IsTrue(works);
         }
     }

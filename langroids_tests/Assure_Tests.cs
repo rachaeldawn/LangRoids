@@ -8,19 +8,21 @@ namespace langroids_tests {
     [TestCategory("Assure")]
     public class Assure_Tests {
         [TestMethod]
-        public void Assure_CallsExceptionOnNullAction() => Assert.ThrowsException<ArgumentException>(() => Assure(false, null, new ArgumentException( )));
+        public void Assure_CallsExceptionOnNullAction() => Assert.ThrowsException<ArgumentException>(() => Assure<ArgumentException>(false, null));
 
         [TestMethod]
         public void Assure_CallsAction() {
             bool works = false;
-            Assure(false, () => works = true, null);
+            Assure<Exception>(false, () => works = true);
             Assert.IsTrue(works);
         }
 
         [TestMethod]
-        public void Assure_ReturnsFalseAfterActionCall() => Assert.IsFalse(Assure(false, DoNothing, null));
+        public void Assure_ReturnsFalseAfterActionCall() 
+            => Assert.IsFalse(Assure<Exception>(false, DoNothing));
 
         [TestMethod]
-        public void Assure_ReturnsTrueIfTestTrue() => Assert.IsTrue(Assure(true, null, null));
+        public void Assure_ReturnsTrueIfTestTrue() 
+            => Assert.IsTrue(Assure<Exception>(true, null));
     }
 }
