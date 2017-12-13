@@ -11,9 +11,8 @@ public class Reasoning {
     /// <returns></returns>
     (Func<bool> Test, Action Do)[] Sequence {get;set;}
 
-    public Reasoning(params (Func<bool>, Action)[] reasons) {
-        Sequence = reasons;
-    }
+    public Reasoning(params (Func<bool>, Action)[] reasons) 
+        => Sequence = reasons;
 
     public void Invoke() => ForEach(Sequence, reason => Perform(reason.Test, reason.Do));
 

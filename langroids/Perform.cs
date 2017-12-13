@@ -26,6 +26,9 @@ public static partial class LangRoids {
     public static void Perform(bool test, Action success)
         => Perform(test, DoNothing, success);
 
+    public static void Perform<E>(bool test, Action success)
+        where  E : Exception, new()
+        => Perform(test, () => throw new E( ), success);
     /// <summary>
     /// Throw an exception if the test fails, otherwise perform success
     /// </summary>
@@ -38,18 +41,18 @@ public static partial class LangRoids {
 
     public static void Perform<E>(bool test, Action fail, Action success)
         where E : Exception, new()
-        => Perform(test, (fail ?? (() => throw new E())), success);
+        => Perform(test, (fail ?? (() => throw new E( ))), success);
     /// <summary>
     /// Call success if performing test returns true, otherwise call fail
     /// </summary>
     /// <param name="test"></param>
     /// <param name="fail"></param>
     /// <param name="success"></param>
-    public static void Perform(Func<bool> test, Action fail, Action success) 
+    public static void Perform(Func<bool> test, Action fail, Action success)
         => Perform(test( ), fail, success);
 
 
-    public static void Perform<E>(Func<bool> test, Action fail, Action success) 
+    public static void Perform<E>(Func<bool> test, Action fail, Action success)
         where E : Exception, new()
         => Perform(test( ), (fail ?? (() => throw new E( ))), success);
     /// <summary>
@@ -57,8 +60,37 @@ public static partial class LangRoids {
     /// </summary>
     /// <param name="test"></param>
     /// <param name="success"></param>
-    public static void Perform(Func<bool> test, Action success) 
+    public static void Perform(Func<bool> test, Action success)
         => Perform(test, DoNothing, success);
+
+    public static void Perform(Assurance asr, Action success)
+        => Perform(asr.Test, asr.Fail, success);
+
+    public static void Perform(Assurance[] asrs, Action success) {
+        foreach (var asr in asrs) {
+            if (!asr.Test) {
+                asr.Fail( );
+                return;
+            }
+        }
+        success( );
+    }
+    public static void Perform(Assurance a1, Assurance a2, Action success)
+        => Perform(new Assurance[] { a1, a2 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Action success)
+        => Perform(new Assurance[] { a1, a2, a3 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Assurance a5, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4, a5 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Assurance a5, Assurance a6, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4, a5, a6 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Assurance a5, Assurance a6, Assurance a7, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4, a5, a6, a7 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Assurance a5, Assurance a6, Assurance a7, Assurance a8, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4, a5, a6, a7, a8 }, success);
+    public static void Perform(Assurance a1, Assurance a2, Assurance a3, Assurance a4, Assurance a5, Assurance a6, Assurance a7, Assurance a8, Assurance a9, Action success)
+        => Perform(new Assurance[] { a1, a2, a3, a4, a5, a6, a7, a8, a9 }, success);
 
     public static void Perform<E>(Assurance<E> asr, Action success)
         where E : Exception, new()
