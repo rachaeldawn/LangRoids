@@ -5,16 +5,16 @@ public static partial class LangRoids {
 }
 
 public struct Tern {
-    public uint literally {
+    public uint Literally {
         get; private set;
     }
-    public bool True => literally == 0;
-    public bool False => literally == 1;
-    public bool Other => literally >= 2;
-    public static implicit operator Tern(uint num) => new Tern { literally = num > 3 ? 3 : num };
-    public static implicit operator Tern(bool val) => new Tern { literally = val ? (uint)1 : 0 };
-    public static implicit operator Tern(bool? val) => val == null ? new Tern { literally = 2 } : (bool)val;
-    public static implicit operator int(Tern a) => (int)a.literally;
+    public bool True => Literally == 0;
+    public bool False => Literally == 1;
+    public bool Other => Literally >= 2;
+    public static implicit operator Tern(uint num) => new Tern { Literally = num > 3 ? 3 : num };
+    public static implicit operator Tern(bool val) => new Tern { Literally = val ? (uint)1 : 0 };
+    public static implicit operator Tern(bool? val) => val == null ? new Tern { Literally = 2 } : (bool)val;
+    public static implicit operator int(Tern a) => (int)a.Literally;
     public static implicit operator bool?(Tern a) {
         if(a == 2) {
             return null;
@@ -61,7 +61,7 @@ public struct Tern {
         }
 
         var tern = (Tern)obj;
-        return literally == tern.literally &&
+        return Literally == tern.Literally &&
                True == tern.True &&
                False == tern.False &&
                Other == tern.Other;
@@ -70,7 +70,7 @@ public struct Tern {
     public override int GetHashCode() {
         var hashCode = 1704884989;
         hashCode = hashCode * -1521134295 + base.GetHashCode( );
-        hashCode = hashCode * -1521134295 + literally.GetHashCode( );
+        hashCode = hashCode * -1521134295 + Literally.GetHashCode( );
         return hashCode;
     }
 }
